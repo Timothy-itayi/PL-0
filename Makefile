@@ -1,23 +1,22 @@
-# pl0c Makefile
+PROG = pl0c
+OBJS = pl0c.o  # Ensure this includes the object files you want to link
 
-CC ?=		cc
-CFLAGS ?=	-g -O2 -DHAVE_STRTONUM
+CC ?= cc
+CFLAGS ?= -g -O2
+LDFLAGS ?=
 
-PREFIX ?=	/usr/local
-MANDIR ?=	${PREFIX}/man
+PREFIX ?= /usr/local
+MANDIR ?= ${PREFIX}/man
 
-PROG =	pl0c
-OBJS =	pl0c.o
-
-BOOTSTRAP =	bootstrap
-STAGE2 =	stage2
+BOOTSTRAP = bootstrap
+STAGE2 = stage2
 
 all: final
 
 bootstrap: ${OBJS}
 	${CC} ${LDFLAGS} -o ${BOOTSTRAP} ${OBJS}
 
-stage2: bootstrap
+stage2: bootstrap ${OBJS}  # Add ${OBJS} in case more object files are needed
 	./${BOOTSTRAP} < pl0c.pl0 | ${CC} ${CFLAGS} -o ${STAGE2} -x c -
 
 stage3: stage2
