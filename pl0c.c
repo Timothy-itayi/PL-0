@@ -313,8 +313,7 @@ parse(void)
  * Main.
  */
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	char *startp;
 
